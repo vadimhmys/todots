@@ -21,8 +21,9 @@ export function TodoList(props: PropsType) {
 
   const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setNewTaskTitle(e.currentTarget.value);
 
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.ctrlKey && e.charCode === 13) {
+  const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.repeat) return;
+    if (e.ctrlKey && e.code === 'Enter') {
       props.addTask(newTaskTitle);
       setNewTaskTitle("");
     }
@@ -44,7 +45,7 @@ export function TodoList(props: PropsType) {
         <input
           value={newTaskTitle}
           onChange={onNewTitleChangeHandler}
-          onKeyPress={onKeyPressHandler}
+          onKeyDown={onKeyDownHandler}
         />
         <button onClick={addTask}>+</button>
       </div>
