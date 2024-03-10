@@ -14,8 +14,6 @@ function App() {
     { id: v1(), title: 'GraphQL', isDone: false }
   ]);
 
-  console.log(tasks);
-
   let [filter, setFilter] = useState<FilterValuesType>("all");
 
   function removeTask(id: string) {
