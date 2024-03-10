@@ -31,6 +31,20 @@ function App() {
     setFilter(value);
   }
 
+  function changeStatus(taskId: string, isDone: boolean) {
+    const newTasks = tasks.map((t) => {
+      if (t.id === taskId) {
+        return {
+          ...t,
+          isDone,
+        };
+      } else {
+        return t;
+      }
+    });
+    setTasks(newTasks);
+  }
+
   let tasksForTodoList = tasks;
   if (filter === "completed") {
     tasksForTodoList = tasks.filter(t => t.isDone === true);
@@ -47,6 +61,7 @@ function App() {
         removeTask={removeTask}
         changeFilter={changeFilter}
         addTask={addTask}
+        changeTaskStatus={changeStatus}
         />
     </div>
   );
