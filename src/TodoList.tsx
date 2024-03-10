@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 import { FilterValuesType } from './App';
 import { useState } from 'react';
 
@@ -18,26 +18,35 @@ type PropsType = {
 
 export function TodoList(props: PropsType) {
   const [newTaskTitle, setNewTaskTitle] = useState('');
+
+  const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setNewTaskTitle(e.currentTarget.value);
+
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.ctrlKey && e.charCode === 13) {
+      props.addTask(newTaskTitle);
+      setNewTaskTitle("");
+    }
+  };
+
+  const addTask = () => {
+    props.addTask(newTaskTitle);
+    setNewTaskTitle("");
+  };
+
+  const onAllClickHandler = () => props.changeFilter("all");
+  const onActiveClickHandler = () => props.changeFilter("active");
+  const onCompletedClickHandler = () => props.changeFilter("completed");
+
   return (
     <div>
       <h3>{props.title}</h3>
       <div>
         <input
           value={newTaskTitle} 
-          onChange={e => {
-            setNewTaskTitle(e.currentTarget.value)
-          }}
-          onKeyPress={e => {
-            if (e.ctrlKey && e.charCode === 13) {
-              props.addTask(newTaskTitle);
-              setNewTaskTitle("");
-            }
-          }}
+          onChange={onNewTitleChangeHandler}
+          onKeyPress={onKeyPressHandler}
           />
-        <button onClick={e => {
-          props.addTask(newTaskTitle);
-          setNewTaskTitle("");
-        }}>+</button>
+        <button onClick={addTask}>+</button>
       </div>
       <ul>
         {props.tasks.map(t => <li key={t.id}><input type="checkbox" checked={t.isDone} />
@@ -50,9 +59,9 @@ export function TodoList(props: PropsType) {
         
       </ul>
       <div>
-        <button onClick={() => props.changeFilter("all")}>All</button>
-        <button onClick={() => props.changeFilter("active")}>Active</button>
-        <button onClick={() => props.changeFilter("completed")}>Completed</button>
+        <button onClick={onAllClickHandler}>All</button>
+        <button onClick={onActiveClickHandler}>Active</button>
+        <button onClick={onCompletedClickHandler}>Completed</button>
       </div>
     </div>
   );
