@@ -48,7 +48,6 @@ function App() {
   }
 
   function changeStatus(taskId: string, isDone: boolean, todolistId: string) {
-
     const newTasks = tasksObj[todolistId].map((t) => {
       if (t.id === taskId) {
         return {
@@ -72,6 +71,12 @@ function App() {
     {id: todolistId1, title: "What to learn", filter: "active"},
     {id: todolistId2, title: "What to buy", filter: "completed"},
   ]);
+
+  let removeTodolist = (todolistId: string) => {
+    setTodolists(todolists.filter(tl => tl.id !== todolistId));
+    delete tasksObj[todolistId];
+    setTasks({...tasksObj})
+  };
 
   let [tasksObj, setTasks] = useState({
     [todolistId1]: [
@@ -108,6 +113,7 @@ function App() {
             addTask={addTask}
             changeTaskStatus={changeStatus}
             filter={tl.filter}
+            removeTodolist={removeTodolist}
           />
         );
       })}
