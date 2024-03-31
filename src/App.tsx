@@ -125,6 +125,19 @@ function App() {
       [todolistId]: newTasks
     });
   }
+
+  function changeTodolistTitle(id: string, newTitle: string) {
+    setTodolists(todolists.map(tl => {
+      if (tl.id === id) {
+        return {
+          ...tl,
+          title: newTitle
+        };
+      } else {
+        return tl;
+      }
+    }));
+  }
   
   return (
     <div className="App">
@@ -150,6 +163,7 @@ function App() {
             filter={tl.filter}
             removeTodolist={removeTodolist}
             changeTaskTitle={changeTaskTitle}
+            changeTodolistTitle={changeTodolistTitle}
           />
         );
       })}
