@@ -104,6 +104,23 @@ function App() {
       [todolist.id]: []
     });
   }
+
+  function changeTaskTitle(taskId: string, todolistId: string, newTitle: string) {
+    const newTask = tasksObj[todolistId].map(t => {
+      if (t.id === taskId) {
+        return {
+          ...t,
+          title: newTitle
+        }
+      } else {
+        return t;
+      }
+    })
+    setTasks({
+      ...tasksObj,
+      [todolistId]: newTask
+    });
+  }
   
   return (
     <div className="App">
@@ -126,6 +143,7 @@ function App() {
             changeFilter={changeFilter}
             addTask={addTask}
             changeTaskStatus={changeStatus}
+            changeTaskTitle={changeTaskTitle}
             filter={tl.filter}
             removeList={removeList}
           />
