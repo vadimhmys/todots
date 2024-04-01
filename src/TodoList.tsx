@@ -80,7 +80,9 @@ export function TodoList(props: PropsType) {
                 onChange={onChangeStatusHandler}
               />
               <EditableSpan title={t.title} onChange={onChangeTitleHandler} />
-              <button onClick={onRemoveHandler}>X</button>
+              <IconButton onClick={onRemoveHandler}>
+                <Delete />
+              </IconButton>
             </li>
           );
         })}
