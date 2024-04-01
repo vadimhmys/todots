@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import { useState } from "react";
-import { Button } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 
 type AddItemFormPropsType = {
   addItem: (title: string) => void
@@ -29,14 +29,16 @@ export default function AddItemForm(props: AddItemFormPropsType) {
 
   return (
     <div>
-      <input
+      <TextField
+        variant="outlined"
+        label="Type value"
         value={title}
         onChange={onChangeHandler}
         onKeyDown={onKeyDownHandler}
-        className={error ? "error" : ""}
+        error={!!error}
+        helperText={error}
       />
       <Button onClick={addTask} variant="contained" color="primary">+</Button>
-      {error && <div className="error-message">Field is required</div>}
     </div>
   );
 }
