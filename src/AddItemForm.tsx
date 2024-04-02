@@ -18,7 +18,7 @@ export default function AddItemForm(props: AddItemFormPropsType) {
       setTitle("");
     }
   };
-  const addTask = () => {
+  const addItem = () => {
     if (title.trim() !== "") {
       props.addItem(title.trim());
       setTitle("");
@@ -38,7 +38,7 @@ export default function AddItemForm(props: AddItemFormPropsType) {
         error={!!error}
         helperText={error}
       />
-      <Button onClick={addTask} variant="contained" color="primary">+</Button>
+      <Button onClick={addItem} variant="contained" color="primary">+</Button>
     </div>
   );
 }
