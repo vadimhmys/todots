@@ -48,7 +48,7 @@ test('correct todolist should change its name', () => {
  ];
 
  const action = {
-  type: 'CHANGE-TODOLIST-TITLE',
+  type: 'CHANGE-TODOLIST-TITLE' as const,
   id: todolistId2,
   title: newTodolistTitle
  };
@@ -71,7 +71,7 @@ test('correct filter of todolist should be changed', () => {
   ];
 
   const action = {
-    type: 'CHANGE-TODOLIST-FILTER',
+    type: 'CHANGE-TODOLIST-FILTER' as const,
     id: todolistId2,
     filter: newFilter
   };
